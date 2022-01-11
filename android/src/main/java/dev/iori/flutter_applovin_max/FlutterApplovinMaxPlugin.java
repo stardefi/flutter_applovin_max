@@ -78,6 +78,7 @@ public class FlutterApplovinMaxPlugin implements FlutterPlugin, MethodCallHandle
                     AppLovinSdk.initializeSdk(activity, new AppLovinSdk.SdkInitializationListener() {
                         @Override
                         public void onSdkInitialized(final AppLovinSdkConfiguration configuration) {
+                            result.success(Boolean.TRUE);
                         }
                     });
                     break;
