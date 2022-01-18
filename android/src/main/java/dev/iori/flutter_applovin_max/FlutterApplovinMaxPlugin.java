@@ -23,7 +23,6 @@ import io.flutter.plugin.common.PluginRegistry.Registrar;
 import io.flutter.plugin.common.StandardMethodCodec;
 import io.flutter.plugin.platform.PlatformViewRegistry;
 
-
 public class FlutterApplovinMaxPlugin implements FlutterPlugin, MethodCallHandler, ActivityAware {
     private static FlutterApplovinMaxPlugin instance;
     private static RewardedVideo instanceReward;
@@ -39,7 +38,8 @@ public class FlutterApplovinMaxPlugin implements FlutterPlugin, MethodCallHandle
     @Override
     public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
         this.RegistrarBanner(flutterPluginBinding.getFlutterEngine().getPlatformViewsController().getRegistry());
-        this.onAttachedToEngine(flutterPluginBinding.getApplicationContext(), flutterPluginBinding.getBinaryMessenger());
+        this.onAttachedToEngine(flutterPluginBinding.getApplicationContext(),
+                flutterPluginBinding.getBinaryMessenger());
     }
 
     public static void registerWith(Registrar registrar) {
@@ -48,7 +48,6 @@ public class FlutterApplovinMaxPlugin implements FlutterPlugin, MethodCallHandle
         }
         instance.onAttachedToEngine(registrar.context(), registrar.messenger());
     }
-
 
     public void onAttachedToEngine(Context applicationContext, BinaryMessenger messenger) {
         if (channel != null) {
@@ -74,7 +73,9 @@ public class FlutterApplovinMaxPlugin implements FlutterPlugin, MethodCallHandle
             switch (call.method) {
                 /* Reward */
                 case "InitSdk":
+                    String user_id = call.argument("UserId").toString();
                     AppLovinSdk.getInstance(activity).setMediationProvider(AppLovinMediationProvider.MAX);
+                    AppLovinSdk.getInstance(activity).setUserIdentifier(user_id);
                     AppLovinSdk.initializeSdk(activity, new AppLovinSdk.SdkInitializationListener() {
                         @Override
                         public void onSdkInitialized(final AppLovinSdkConfiguration configuration) {
