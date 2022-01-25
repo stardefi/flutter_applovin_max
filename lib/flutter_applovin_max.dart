@@ -35,10 +35,22 @@ class FlutterApplovinMax {
     'UserRewarded': AppLovinAdListener.onUserRewarded,
   };
 
-  static Future<void> initSDK(String userId) async {
+  static Future<void> initSDK(
+      String userId, String reward, String inter) async {
     try {
-      return await _channel
-          .invokeMethod('InitSdk', <String, dynamic>{'UserId': userId});
+      return await _channel.invokeMethod('InitSdk', <String, dynamic>{
+        'UserId': userId,
+        'RewardId': reward,
+        'InterId': inter
+      });
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
+  static Future<void> showDebugger() async {
+    try {
+      return await _channel.invokeMethod('ShowDebugger');
     } catch (e) {
       print(e.toString());
     }

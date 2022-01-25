@@ -1,4 +1,5 @@
 package dev.iori.flutter_applovin_max;
+
 import android.content.Context;
 
 import java.util.HashMap;
@@ -14,6 +15,6 @@ public class BannerFactory extends PlatformViewFactory {
 
     @Override
     public PlatformView create(Context context, int viewId, Object args) {
-        return new BannerMax(context, (HashMap) args);
+        return new BannerMax(context, viewId, (HashMap) args);
     }
 }

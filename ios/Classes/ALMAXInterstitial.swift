@@ -18,6 +18,13 @@ class ALMAXInterstitial:  NSObject, MAAdViewAdDelegate {
             Ad?.load()
        }
     }
+    
+    func initInterApplovin(_ unitId: String) {
+        Ad = MAInterstitialAd.init(adUnitIdentifier: unitId)
+        Ad?.delegate = self
+        //Load first ad
+        Ad?.load()
+    }
    
     func didLoad(_ ad: MAAd)
     {

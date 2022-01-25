@@ -12,20 +12,34 @@ public class SwiftFlutterApplovinMaxPlugin:  NSObject, FlutterPlugin {
         globalMethodChannel = FlutterMethodChannel(name: "flutter_applovin_max", binaryMessenger: registrar.messenger())
         let instance = SwiftFlutterApplovinMaxPlugin()
         registrar.addMethodCallDelegate(instance, channel: globalMethodChannel!)
+        registrar.register(
+            ALMAXBannerAdFactory(_registrar: registrar),
+                    withId: "/Banner"
+                )
     }
 
     public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
         switch call.method {
         case "InitSdk":
-            if let args = call.arguments as? Dictionary<String, Any>,
-                let userId = args["UserId"] as? String {
+            let args = call.arguments as? Dictionary<String, Any>
+            if let userId = args?["UserId"] as? String {
                     ALSdk.shared()!.userIdentifier = userId
             }
+            
             ALSdk.shared()!.mediationProvider = ALMediationProviderMAX
             ALSdk.shared()!.initializeSdk(completionHandler: { configuration in
                 // AppLovin SDK is initialized, start loading ads now or later if ad gate is reached
+                if let rewardId = args?["RewardId"] as? String {
+                    self.rewardMax.initRewardedApplovin(rewardId)
+                }
+                if let interId = args?["InterId"] as? String {
+                    self.interMax.initInterApplovin(interId)
+                }
                 result(true)
             })
+        case "ShowDebugger":
+            ALSdk.shared()!.showMediationDebugger()
+            result(true)
         /*Reward*/
         case "InitRewardAd":
             rewardMax.initRewardedApplovin(call)

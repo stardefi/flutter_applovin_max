@@ -15,6 +15,12 @@ class ALMAXReward:  NSObject, MARewardedAdDelegate {
        }
     }
     
+    func initRewardedApplovin(_ unitId: String) {
+        Ad = MARewardedAd.shared(withAdUnitIdentifier: unitId)
+        Ad?.delegate = self
+        Ad?.load()
+    }
+    
     public func didStartRewardedVideo(for ad: MAAd) {
         globalMethodChannel?.invokeMethod("RewardedVideoStarted", arguments: nil)
     }

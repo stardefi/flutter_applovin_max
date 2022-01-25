@@ -74,14 +74,22 @@ public class FlutterApplovinMaxPlugin implements FlutterPlugin, MethodCallHandle
                 /* Reward */
                 case "InitSdk":
                     String user_id = call.argument("UserId").toString();
+                    String reward_id = call.argument("RewardId").toString();
+                    String inter_id = call.argument("InterId").toString();
                     AppLovinSdk.getInstance(activity).setMediationProvider(AppLovinMediationProvider.MAX);
                     AppLovinSdk.getInstance(activity).setUserIdentifier(user_id);
                     AppLovinSdk.initializeSdk(activity, new AppLovinSdk.SdkInitializationListener() {
                         @Override
                         public void onSdkInitialized(final AppLovinSdkConfiguration configuration) {
-                            result.success(Boolean.TRUE);
+                            // result.success(Boolean.TRUE);
+                            instanceReward.Init(reward_id);
+                            instanceInter.Init(inter_id);
                         }
                     });
+                    break;
+                case "ShowDebugger":
+                    AppLovinSdk.getInstance(this).showMediationDebugger();
+                    result.success(Boolean.TRUE);
                     break;
                 case "InitRewardAd":
                     String unitId = call.argument("UnitId").toString();
