@@ -2,10 +2,13 @@ buildscript {
     repositories {
         google()
         jcenter()
+        mavenCentral()
+        maven { url 'https://artifacts.applovin.com/android' }
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.5.0'
+        classpath 'com.android.tools.build:gradle:7.0.2'
+        classpath "com.applovin.quality:AppLovinQualityServiceGradlePlugin:+"
     }
 }
 
@@ -13,6 +16,11 @@ allprojects {
     repositories {
         google()
         jcenter()
+        mavenCentral()
+        maven { url "https://sdk.tapjoy.com/"}
+        maven {
+            url "https://jitpack.io"
+        }
     }
 }
 

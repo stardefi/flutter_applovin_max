@@ -1,4 +1,4 @@
-package dev.iori.flutter_applovin_max_example;
+package io.starnetwork.app;
 
 import io.flutter.embedding.android.FlutterActivity;
 

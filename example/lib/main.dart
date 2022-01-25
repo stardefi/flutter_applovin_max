@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 import 'package:flutter_applovin_max/flutter_applovin_max.dart';
@@ -13,8 +15,8 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   void initState() {
-    FlutterApplovinMax.initRewardAd('YOUR_AD_UNIT_ID');
-    FlutterApplovinMax.initInterstitialAd('YOUR_AD_UNIT_ID');
+    print('init state');
+    FlutterApplovinMax.initSDK('test', '', '');
     super.initState();
   }
 
@@ -36,32 +38,44 @@ class _MyAppState extends State<MyApp> {
           title: const Text('Plugin example app'),
         ),
         body: Center(
-          child: Column(
-            children: [
-              const Spacer(),
-              TextButton(
-                onPressed: () async {
-                  isRewardedVideoAvailable = await FlutterApplovinMax.isRewardLoaded(listener);
-                  if (isRewardedVideoAvailable) {
-                    FlutterApplovinMax.showRewardVideo((AppLovinAdListener event) => listener(event));
-                  }
-                },
-                child: const Text('Show Reward Video'),
-              ),
-              TextButton(
-                onPressed: () async {
-                  isInterstitialVideoAvailable = await FlutterApplovinMax.isInterstitialLoaded(listener);
-                  if (isInterstitialVideoAvailable) {
-                    FlutterApplovinMax.showInterstitialVideo((AppLovinAdListener event) => listener(event));
-                  }
-                },
-                child: const Text('Show Interstitial Video'),
-              ),
-              const Spacer(),
-            ],
-          )
-        ),
-        bottomNavigationBar: BannerMaxView((AppLovinAdListener event) => print(event), BannerAdSize.banner, "YOUR_AD_UNIT_ID"),
+            child: Column(
+          children: [
+            const Spacer(),
+            TextButton(
+              onPressed: () async {
+                isRewardedVideoAvailable =
+                    await FlutterApplovinMax.isRewardLoaded(listener);
+                if (isRewardedVideoAvailable) {
+                  FlutterApplovinMax.showRewardVideo(
+                      (AppLovinAdListener event) => listener(event));
+                }
+              },
+              child: const Text('Show Reward Video'),
+            ),
+            TextButton(
+              onPressed: () async {
+                isInterstitialVideoAvailable =
+                    await FlutterApplovinMax.isInterstitialLoaded(listener);
+                if (isInterstitialVideoAvailable) {
+                  FlutterApplovinMax.showInterstitialVideo(
+                      (AppLovinAdListener event) => listener(event));
+                }
+              },
+              child: const Text('Show Interstitial Video'),
+            ),
+            TextButton(
+              onPressed: () async {
+                await FlutterApplovinMax.showDebugger();
+              },
+              child: const Text('Show Debugger'),
+            ),
+            const Spacer(),
+          ],
+        )),
+        bottomNavigationBar: BannerMaxView(
+            (AppLovinAdListener event) => print(event),
+            BannerAdSize.banner,
+            ''),
       ),
     );
   }
