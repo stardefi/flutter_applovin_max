@@ -51,14 +51,16 @@ class ALMAXBannerAdView: NSObject, FlutterPlatformView,MAAdViewAdDelegate{
         }
     func initView(){
         self.mainView = UIView(frame: self.frame)
-        self.mainView.backgroundColor = UIColor(red: 41/255, green: 41/255, blue: 41/255, alpha: 1)
+        self.mainView.backgroundColor = UIColor(red: 41/255, green: 41/255, blue: 41/255, alpha: 0)
     }
     func initMaxView(){
+        let height: CGFloat = (UIDevice.current.userInterfaceIdiom == .pad) ? 90 : 50
+        let width: CGFloat = UIScreen.main.bounds.width
         let unitId: String = self.params["UnitId"] as! String
         adView = MAAdView(adUnitIdentifier: unitId)
         adView.delegate = self
-        adView.frame = frame
-        adView.backgroundColor = UIColor(red: 41/255, green: 41/255, blue: 41/255, alpha: 1)
+        adView.frame = CGRect(x: self.frame.midX, y: self.frame.midY, width: width, height: height)
+        adView.backgroundColor = UIColor(red: 41/255, green: 41/255, blue: 41/255, alpha: 0)
         
         adView.loadAd()
         
@@ -71,23 +73,23 @@ class ALMAXBannerAdView: NSObject, FlutterPlatformView,MAAdViewAdDelegate{
     }
     
     func didLoad(_ ad: MAAd) {
-        globalMethodChannel?.invokeMethod("AdLoaded", arguments: nil)
+        bannerMethodChannel?.invokeMethod("AdLoaded", arguments: nil)
     }
     
     func didFailToLoadAd(forAdUnitIdentifier adUnitIdentifier: String, withError error: MAError) {
-        globalMethodChannel?.invokeMethod("AdFailedToDisplay", arguments: nil)
+        bannerMethodChannel?.invokeMethod("AdFailedToDisplay", arguments: nil)
     }
     
     func didDisplay(_ ad: MAAd) {
-        globalMethodChannel?.invokeMethod("AdDisplayed", arguments: nil)
+        bannerMethodChannel?.invokeMethod("AdDisplayed", arguments: nil)
     }
     
     func didHide(_ ad: MAAd) {
-        globalMethodChannel?.invokeMethod("AdHidden", arguments: nil)
+        bannerMethodChannel?.invokeMethod("AdHidden", arguments: nil)
     }
     
     func didClick(_ ad: MAAd) {
-        globalMethodChannel?.invokeMethod("AdClicked", arguments: nil)
+        bannerMethodChannel?.invokeMethod("AdClicked", arguments: nil)
     }
     
     func didFail(toDisplay ad: MAAd, withError error: MAError) {

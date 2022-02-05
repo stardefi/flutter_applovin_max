@@ -88,7 +88,7 @@ public class FlutterApplovinMaxPlugin implements FlutterPlugin, MethodCallHandle
                     });
                     break;
                 case "ShowDebugger":
-                    AppLovinSdk.getInstance(this).showMediationDebugger();
+                    AppLovinSdk.getInstance(activity).showMediationDebugger();
                     result.success(Boolean.TRUE);
                     break;
                 case "InitRewardAd":

@@ -60,6 +60,6 @@ class ALMAXInterstitial:  NSObject, MAAdViewAdDelegate {
     }
     
     func didFail(toDisplay ad: MAAd, withError error: MAError) {
-        Ad?.load()
+        retryAttempt = 0
     }
 }

@@ -3,6 +3,7 @@ import UIKit
 import AppLovinSDK
 
 var globalMethodChannel: FlutterMethodChannel?
+var bannerMethodChannel: FlutterMethodChannel?
 
 public class SwiftFlutterApplovinMaxPlugin:  NSObject, FlutterPlugin {
     private var rewardMax = ALMAXReward();
@@ -10,6 +11,7 @@ public class SwiftFlutterApplovinMaxPlugin:  NSObject, FlutterPlugin {
 
     public static func register(with registrar: FlutterPluginRegistrar) {
         globalMethodChannel = FlutterMethodChannel(name: "flutter_applovin_max", binaryMessenger: registrar.messenger())
+        bannerMethodChannel = FlutterMethodChannel(name: "flutter_applovin_max_banner", binaryMessenger: registrar.messenger())
         let instance = SwiftFlutterApplovinMaxPlugin()
         registrar.addMethodCallDelegate(instance, channel: globalMethodChannel!)
         registrar.register(
