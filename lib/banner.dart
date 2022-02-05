@@ -48,7 +48,7 @@ class BannerMaxView extends StatelessWidget {
             creationParamsCodec: const StandardMessageCodec(),
             onPlatformViewCreated: (int i) {
               const MethodChannel channel =
-                  MethodChannel('flutter_applovin_max');
+                  MethodChannel('flutter_applovin_max_banner');
               channel.setMethodCallHandler((MethodCall call) async =>
                   FlutterApplovinMax.handleMethod(call, listener));
             }),
@@ -65,7 +65,7 @@ class BannerMaxView extends StatelessWidget {
               creationParamsCodec: const StandardMessageCodec(),
               onPlatformViewCreated: (int i) {
                 const MethodChannel channel =
-                    MethodChannel('flutter_applovin_max');
+                    MethodChannel('flutter_applovin_max_banner');
                 channel.setMethodCallHandler((MethodCall call) async =>
                     FlutterApplovinMax.handleMethod(call, listener));
               }),
