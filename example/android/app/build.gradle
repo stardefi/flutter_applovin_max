@@ -28,7 +28,7 @@ applovin {
        apiKey "5J9BW964cieN6QAMhZM-OJ3lMcn1vxTvVPAAd5Aw_CvWHK-CoFkJp9MsMl6oW3dhRZiATfeGRUg419vBpEvf1x"    
 }
 android {
-    compileSdkVersion 29
+    compileSdkVersion 31
 
     lintOptions {
         disable 'InvalidPackage'

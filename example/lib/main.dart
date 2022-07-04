@@ -16,7 +16,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     print('init state');
-    FlutterApplovinMax.initSDK('test', '', '');
+    FlutterApplovinMax.initSDK('', '', '');
     super.initState();
   }
 
@@ -47,7 +47,9 @@ class _MyAppState extends State<MyApp> {
                     await FlutterApplovinMax.isRewardLoaded(listener);
                 if (isRewardedVideoAvailable) {
                   FlutterApplovinMax.showRewardVideo(
-                      (AppLovinAdListener event) => listener(event));
+                      (AppLovinAdListener event) => listener(event),
+                      placementId: '',
+                      custom: '');
                 }
               },
               child: const Text('Show Reward Video'),
@@ -72,10 +74,10 @@ class _MyAppState extends State<MyApp> {
             const Spacer(),
           ],
         )),
-        bottomNavigationBar: BannerMaxView(
-            (AppLovinAdListener event) => print(event),
-            BannerAdSize.banner,
-            ''),
+        // bottomNavigationBar: BannerMaxView(
+        //     (AppLovinAdListener event) => print(event),
+        //     BannerAdSize.banner,
+        //     ''),
       ),
     );
   }
