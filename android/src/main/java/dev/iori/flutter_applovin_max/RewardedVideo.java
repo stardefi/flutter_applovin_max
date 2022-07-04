@@ -20,10 +20,16 @@ public class RewardedVideo implements MaxRewardedAdListener, MaxAdRevenueListene
         RewardedAd.loadAd();
     }
 
-    public void Show() {
+    public void Show(String placementId, String custom) {
         try {
-            if (RewardedAd != null && RewardedAd.isReady() && FlutterApplovinMaxPlugin.getInstance().activity != null)
-                RewardedAd.showAd();
+            if (RewardedAd != null && RewardedAd.isReady() && FlutterApplovinMaxPlugin.getInstance().activity != null){
+                if(custom != null){
+                    RewardedAd.showAd(placementId, custom);
+                }else{
+                    RewardedAd.showAd(placementId);
+                }
+            }
+                
         } catch (Exception e) {
             Log.e("AppLovin", e.toString());
         }

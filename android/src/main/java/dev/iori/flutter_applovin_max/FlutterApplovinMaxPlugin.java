@@ -97,7 +97,9 @@ public class FlutterApplovinMaxPlugin implements FlutterPlugin, MethodCallHandle
                     result.success(Boolean.TRUE);
                     break;
                 case "ShowRewardVideo":
-                    instanceReward.Show();
+                    String placementId = call.argument("placementId").toString();
+                    String custom = call.argument("custom").toString();
+                    instanceReward.Show(placementId, custom);
                     result.success(Boolean.TRUE);
                     break;
                 case "IsRewardLoaded":

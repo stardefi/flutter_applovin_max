@@ -65,11 +65,15 @@ class FlutterApplovinMax {
     }
   }
 
-  static Future<void> showRewardVideo(AppLovinListener listener) async {
+  static Future<void> showRewardVideo(AppLovinListener listener,
+      {String? placementId, String? custom}) async {
     try {
       _channel.setMethodCallHandler(
           (MethodCall call) async => handleMethod(call, listener));
-      await _channel.invokeMethod<void>('ShowRewardVideo');
+      await _channel.invokeMethod<void>(
+        'ShowRewardVideo',
+        <String, dynamic>{'placementId': placementId, 'custom': custom},
+      );
     } catch (e) {
       print(e.toString());
     }
